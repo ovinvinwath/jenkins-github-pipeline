@@ -3,27 +3,72 @@ pipeline{
     stages{
         stage("Build"){
             steps{
-                echo "Building ..."
+                echo "building code using Maven"
+            }
+        }
+
+        stage("Unit and Integration Tests"){
+            steps{
+                echo "Testing using Robot Framework"
+            }
+        }
+
+        stage("Code Analysis"){
+            steps{
+                echo "Analysing using FindBugs"
+            }
+        }
+
+        stage("Security Scan"){
+            steps{
+                echo "Scanning using Probely"
             }
             post{
                 always{
-                    mail to: "visse.entertainment@gmail.com",
-                    subject: "Build status email",
-                    body: "Build log attached!"
+                    echo "Mail sent..."
                 }
-                
+                success{
+                    mail to: "visse.entertainment@gmail.com",
+                    subject: "Security Scan Finished",
+                    body: "the scan has successfully been completed"
+                }
+                failure{
+                    mail to: "visse.entertainment@gmail.com",
+                    subject: "Test Finished",
+                    body: "the scan has failed"
+                }
+            }
+        
+        }
+        stage(" Deploy to Staging"){
+            steps{
+                echo "deploying to AWS EC2 instance for staging"
             }
         }
 
-        stage("Test"){
+        stage("Integration Tests on Staging "){
             steps{
-                echo "Testing..."
+                echo "Running integration tests on AWS EC2 server instance"
+            }
+            post{
+                always{
+                    echo "Mail sent..."
+                }
+                success{
+                    mail to: "visse.entertainment@gmail.com",
+                    subject: "Test Finished",
+                    body: "the test has successfully been completed"
+                }
+                failure{
+                    mail to: "visse.entertainment@gmail.com",
+                    subject: "Test Finished",
+                    body: "the test has failed"
+                }
             }
         }
-
-        stage("Deploy"){
+        stage("Deploy to Production"){
             steps{
-                echo "Deploying..."
+                echo "Deploying to launch EC2 instance"
             }
         }
     }
