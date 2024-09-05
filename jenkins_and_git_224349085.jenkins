@@ -26,16 +26,9 @@ pipeline{
             post{
                 always{
                     echo "Mail sent..."
-                }
-                success{
                     emailext body: 'Test Message',
                     subject: 'Test Subject',
                     to: 's224349085@deakin.edu.au'
-                }
-                failure{
-                    mail to: "visse.entertainment@gmail.com",
-                    subject: "Test Finished",
-                    body: "the scan has failed"
                 }
             }
         
@@ -53,16 +46,9 @@ pipeline{
             post{
                 always{
                     echo "Mail sent..."
-                }
-                success{
-                    mail to: "visse.entertainment@gmail.com",
-                    subject: "Test Finished",
-                    body: "the test has successfully been completed"
-                }
-                failure{
-                    mail to: "visse.entertainment@gmail.com",
-                    subject: "Test Finished",
-                    body: "the test has failed"
+                    emailext body: 'Test Message',
+                    subject: 'Test Subject',
+                    to: 's224349085@deakin.edu.au'
                 }
             }
         }
