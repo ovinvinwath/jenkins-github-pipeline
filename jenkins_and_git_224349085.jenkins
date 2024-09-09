@@ -24,10 +24,10 @@ pipeline{
                 echo "Scanning using Probely"
             }
             post{
-                always{
+                success{
                     echo "Mail sent..."
                     emailext body: 'Test Message',
-                    subject: 'Test Subject',
+                    subject: 'Security Scan Complete',
                     to: 's224349085@deakin.edu.au'
                 }
             }
@@ -39,15 +39,15 @@ pipeline{
             }
         }
 
-        stage("Integration Tests on Staging "){
+        stage("Integration Tests on Staging"){
             steps{
                 echo "Running integration tests on AWS EC2 server instance"
             }
             post{
-                always{
+                success{
                     echo "Mail sent..."
                     emailext body: 'Test Message',
-                    subject: 'Test Subject',
+                    subject: 'Integration Test Complete',
                     to: 's224349085@deakin.edu.au'
                 }
             }
