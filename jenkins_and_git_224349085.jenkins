@@ -28,7 +28,7 @@ pipeline{
                     echo "Mail sent..."
                     emailext body: 'Test Message',
                     subject: 'Security Scan Complete',
-                    to: 's224349085@deakin.edu.au'
+                    to: 'vinwath.2002@gmail.com'
                 }
             }
         
@@ -48,7 +48,7 @@ pipeline{
                     echo "Mail sent..."
                     emailext body: 'Test Message',
                     subject: 'Integration Test Complete',
-                    to: 's224349085@deakin.edu.au'
+                    to: 'vinwath.2002@gmail.com'
                 }
             }
         }
